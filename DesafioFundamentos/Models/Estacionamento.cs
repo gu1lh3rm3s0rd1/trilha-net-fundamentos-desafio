@@ -1,5 +1,7 @@
 namespace DesafioFundamentos.Models
 {
+    // IMPLEMENTADO !!
+    // ALGUNS CASOS APELEI PRO GPT POR PERFORMANCE
     public class Estacionamento
     {
         private decimal precoInicial = 0;
@@ -17,29 +19,34 @@ namespace DesafioFundamentos.Models
             // TODO: Pedir para o usuário digitar uma placa (ReadLine) e adicionar na lista "veiculos"
             // *IMPLEMENTE AQUI*
             Console.WriteLine("Digite a placa do veículo para estacionar:");
+            string placa = Console.ReadLine().ToUpper();
+            veiculos.Add(placa);
+
+            Console.WriteLine($"Veículo com placa {placa} adicionado ao estacionamento.");
         }
 
         public void RemoverVeiculo()
         {
-            Console.WriteLine("Digite a placa do veículo para remover:");
-
             // Pedir para o usuário digitar a placa e armazenar na variável placa
             // *IMPLEMENTE AQUI*
-            string placa = "";
+            Console.WriteLine("Digite a placa do veículo para remover:");
+            string placa = Console.ReadLine().ToUpper();
 
             // Verifica se o veículo existe
-            if (veiculos.Any(x => x.ToUpper() == placa.ToUpper()))
+            if (veiculos.Contains(placa))
             {
                 Console.WriteLine("Digite a quantidade de horas que o veículo permaneceu estacionado:");
 
                 // TODO: Pedir para o usuário digitar a quantidade de horas que o veículo permaneceu estacionado,
                 // TODO: Realizar o seguinte cálculo: "precoInicial + precoPorHora * horas" para a variável valorTotal                
                 // *IMPLEMENTE AQUI*
-                int horas = 0;
-                decimal valorTotal = 0; 
-
+                // int horas = 0;
+                int horas = int.Parse(Console.ReadLine());
+                // decimal valorTotal = 0;
+                decimal valorTotal = precoInicial + (precoPorHora * horas);
                 // TODO: Remover a placa digitada da lista de veículos
                 // *IMPLEMENTE AQUI*
+                veiculos.RemoveAll(v => v.Equals(placa, StringComparison.OrdinalIgnoreCase));
 
                 Console.WriteLine($"O veículo {placa} foi removido e o preço total foi de: R$ {valorTotal}");
             }
@@ -57,6 +64,10 @@ namespace DesafioFundamentos.Models
                 Console.WriteLine("Os veículos estacionados são:");
                 // TODO: Realizar um laço de repetição, exibindo os veículos estacionados
                 // *IMPLEMENTE AQUI*
+                foreach (var placa in veiculos)
+                {
+                    Console.WriteLine(placa);
+                }
             }
             else
             {
